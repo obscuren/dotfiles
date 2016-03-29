@@ -11,7 +11,7 @@ let g:python_host_prog = "/usr/local/bin/python"
 let g:go_fmt_command = "goimports" 
 let g:airline_powerline_fonts = 1
 " When opening a file with Ack, open in the middle of the screen
-let g:ack_mappings = { "o": "<CR>zz" }
+"let g:ack_mappings = { "o": "<CR>zz" }
 let g:ackhighlight = 1
 let g:ackpreview = 1
 
@@ -40,15 +40,17 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
     "==================== Colors ======================================
 
     set background=dark             " Set light barkground
-    let g:solarized_termcolors=256  " Set solarized console to 256 colors
     set t_Co=256                    " Set vim to 256 colors
-    colorscheme solarized           " Color schema
-    "colorscheme molokai
+    let g:solarized_termcolors=256  " Set solarized console to 256 colors
+    let g:solarized_hitrail=1
+    colorscheme solarized
+    " colorscheme  smyck          " Color schema
+    " colorscheme molokai
     "set list!                       " Unset list
 
     "==================== Status line =================================
 
-    set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+    " set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
     set laststatus=2                " Set last status
 
     "===================== Spelling ===================================
@@ -58,8 +60,8 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 
     "===================== Cursor =====================================
 
-    set cursorcolumn                " Column marker
-    set cursorline                  " Set cursor
+    " set cursorcolumn                " Column marker
+    "set cursorline                  " Set cursor
 
     "===================== Indentation ================================
 
@@ -181,6 +183,9 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
     command GREP :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') | copen
     command Dark :set background=dark
     command Light :set background=light
+
+    " Json prettyfier
+    command! -range -nargs=0 -bar JsonTool <line1>,<line2>!python -m json.tool
     "command W :w
 
     " Finally, this cabbrev uses CTRL-R CTRL-W to get the word under the cursor, limiting the search to files of the same type using expand("%:e")
