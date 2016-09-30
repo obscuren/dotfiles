@@ -1,34 +1,66 @@
+" Set the shell something meaningfull
+set shell=/bin/zsh
+" Enable plugins
+filetype plugin indent on
+" Load plugins before config
+execute pathogen#infect()
+
+"########################## Plugin settings ############################
+let g:go_bin_path = "/home/jeffrey/go"
+let g:python_host_prog = "/usr/local/bin/python"
+let g:go_fmt_command = "goimports" 
+let g:airline_powerline_fonts = 1
+" When opening a file with Ack, open in the middle of the screen
+"let g:ack_mappings = { "o": "<CR>zz" }
+let g:ackhighlight = 1
+let g:ackpreview = 1
+
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
 "########################## Main config ################################
+    set nocompatible                " Use vim, no vi defaults
+    set backspace=indent,eol,start  " backspace through everything
+    set enc=utf-8
+    set fileencoding=utf-8
     syn on                          " Turn on syntax highlighting
     set hidden                      " Hide buffers
     set autoread                    " Autoread file if changed outside VIM (Only when the file hasn't changed locally)
     set grepprg=ack               " Set Ack instead of grep
     set wildchar=<Tab> wildmenu wildmode=full " Enable the wild menu on tab in ex mode
     let mapleader=","
-    set number
+    set relativenumber              " show line numbers
+    set hlsearch                    " highlight searches
+    set incsearch                   " incremental searches
+    set ignorecase                  " case insensitive
+    set smartcase                   " .... unless they contain at least one capital letter
+
+    set completeopt=menu,preview
 
     "==================== Colors ======================================
 
     set background=dark             " Set light barkground
-    let g:solarized_termcolors=256  " Set solarized console to 256 colors
     set t_Co=256                    " Set vim to 256 colors
-    colorscheme solarized           " Color schema
-    "colorscheme molokai
-    set list!                       " Unset list
+    let g:solarized_termcolors=256  " Set solarized console to 256 colors
+    let g:solarized_hitrail=1
+    colorscheme gruvbox
+    " colorscheme  smyck          " Color schema
+    " colorscheme molokai
+    "set list!                       " Unset list
 
     "==================== Status line =================================
 
-    set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+    " set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
     set laststatus=2                " Set last status
 
     "===================== Spelling ===================================
 
-    set spell                       " Enable spell checking
-    set spelllang=en                " Set spelling to English
+    "set spell                       " Enable spell checking
+    "set spelllang=en                " Set spelling to English
 
     "===================== Cursor =====================================
 
-    "set cursorcolumn                " Column marker
+    " set cursorcolumn                " Column marker
     "set cursorline                  " Set cursor
 
     "===================== Indentation ================================
@@ -82,18 +114,20 @@
 
     "==================== Windows =====================================
 
-    " Switch to window left
-    map <C-h> <C-w>h
-    " Switch to window right
-    map <C-j> <C-w>j
-    " Switch to window above
-    map <C-k> <C-w>k
-    " Switch to window below
-    map <C-l> <C-w>l
     " Split window vertical
     map <C-\> :vsp<CR>
     " Split window horizontal
     map <C-_> :sp<CR>
+
+    tnoremap <A-h> <C-\><C-n><C-w>h
+    tnoremap <A-j> <C-\><C-n><C-w>j
+    tnoremap <A-k> <C-\><C-n><C-w>k
+    tnoremap <A-l> <C-\><C-n><C-w>l
+    nnoremap <A-h> <C-w>h
+    nnoremap <A-j> <C-w>j
+    nnoremap <A-k> <C-w>k
+    nnoremap <A-l> <C-w>l
+ 
 
     " Edit <file> in current working dir as current file
     map <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
@@ -103,6 +137,10 @@
     map <Leader>vs :vsp <C-R>=expand("%:p:h") . '/'<CR>
 
     "==================== Buffers =====================================
+    
+    set hidden
+    nnoremap <C-l> :bnext<CR>
+    nnoremap <C-h> :bprev<CR>
 
     " Switch to previous buffer
     noremap <Leader><Leader> <C-^>
@@ -134,6 +172,8 @@
     inoremap jj <ESC>
     " Remove trailing spaces
     nnoremap <leader>W %s/\s\+$//<cr>:let @/=''<cr>
+    " Pasting toggle
+    set pastetoggle=<F2>
 
     " ================== GUI ONLY =====================================
 
@@ -149,6 +189,9 @@
     command GREP :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') | copen
     command Dark :set background=dark
     command Light :set background=light
+
+    " Json prettyfier
+    command! -range -nargs=0 -bar JsonTool <line1>,<line2>!python -m json.tool
     "command W :w
 
     " Finally, this cabbrev uses CTRL-R CTRL-W to get the word under the cursor, limiting the search to files of the same type using expand("%:e")
@@ -159,8 +202,8 @@
           \ <C-Left><C-Left><C-Left>
 
     " Scientific calculator
-    command! -nargs=+ Calc :py print <args>
-    py from cmath import *
+    "command! -nargs=+ Calc :py print <args>
+    "py from cmath import *
 "} </Commands>
 
 if has("autocmd")
@@ -174,8 +217,10 @@ if has("autocmd")
   autocmd BufReadPost fugitive://* set bufhidden=delete
   autocmd BufNewFile,BufRead *.hamljs setfiletype haml
 
-  autocmd InsertEnter * set number
-  autocmd InsertLeave * set relativenumber
+  augroup LineNum
+    autocmd InsertEnter * set number
+    autocmd InsertLeave * set relativenumber
+  augroup END
 
   autocmd User fugitive
     \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
