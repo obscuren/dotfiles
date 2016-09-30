@@ -34,7 +34,7 @@ plugins=(git rails ruby osx rvm vi-command)
 source $ZSH/oh-my-zsh.sh
 
 export GOPATH=$HOME/go
-export GOROOT=$HOME/goroot14
+export GOROOT=$HOME/go17
 
 # Customize to your needs...
 export PATH=$GOPATH/bin:$GOROOT/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/sbin:/usr/local/share/python
@@ -55,3 +55,5 @@ export PATH=$COCOS_CONSOLE_ROOT:$PATH
 # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
 export COCOS_CONSOLE_ROOT=/Users/jeffrey/Downloads/cocos2d-x-3.3rc0/tools/cocos2d-console/bin
 export PATH=$COCOS_CONSOLE_ROOT:$PATH
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

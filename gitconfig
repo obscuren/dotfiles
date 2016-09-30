@@ -2,7 +2,7 @@
     name = Jeffrey Wilcke
     email = geffobscura@gmail.com
 [core]
-    editor = vim
+    editor = nvim
     excludesfile = /Users/stygeo/.gitignore
 [color]
     ui = true
@@ -13,14 +13,21 @@
     d = difftool
     hist = log -p 
 	undo-commit = reset --soft HEAD^
+    yolo = !git add . && git commit --amend --no-edit && git push origin --force
 [format]
     pretty = format:%C(bold yellow)%H%Creset %C(bold cyan)%ci%Creset%n%C(bold green)%an%Creset %C(bold)%s%Creset%n
 [github]
     username = obscuren
     user = obscuren
 [diff]
-    tool = vimdiff
+	tool = vimdiff
 [difftool]
     prompt = false
 [push]
     default = matching
+[merge]
+	tool = vimdiff
+[mergetool]
+	path = nvim
+[mergetool "vimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'

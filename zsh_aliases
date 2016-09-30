@@ -1,3 +1,4 @@
+alias vim="nvim"
 alias ss="rails s"
 alias prys="pry -r ./config/environment"
 alias less="less -R"
@@ -9,7 +10,9 @@ alias eali="vim .zsh_aliases"
 alias ezsh="vim .zshrc"
 alias sshx="ssh -X -C -c blowfish-cbc,arcfour"
 alias rseed="export RAILS_ENV=development; export SEED=true ; rake db:drop && rake db:migrate && rake db:seed"
-alias vimrc="vim ~/.vimrc.after"
+alias vimrc="vim ~/.vimrc"
 alias ed="ed -p 'ed> '"
 alias bitcoind='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -server'
 alias eth='cd $GOPATH/src/github.com/ethereum/go-ethereum'
+alias blog='nvim -S $HOME/.config/nvim/blog.vim'
+alias vimdiff="nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'"
