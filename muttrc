@@ -1,0 +1,68 @@
+set my_server       =   "imap.gmail.com"
+set my_smtp_server  =   "smtp.gmail.com"
+set my_user         =   "jeffrey.wilcke@ethereum.org"
+set my_pass         =   ""
+
+set record          =   "imaps://$my_server/INBOX.Sent Items"
+set postponed       =   "imaps://$my_server/INBOX.Drafts"
+
+set from            =   "jeffrey.wilcke@ethereum.org"
+
+# Account - SMTP
+
+set smtp_url        = "smtp://$my_user:$my_pass@$my_smtp_server:587"
+set smtp_pass       = $my_pass
+set imap_user       = $my_user
+set imap_pass       = $my_pass
+set imap_idle       = yes
+set imap_keepalive  = 450
+set ssl_force_tls   = yes
+set ssl_starttls    = yes
+set smtp_authenticators = 'gssapi:login'
+set timeout=30
+
+# Movement
+bind pager <up> previous-line
+bind pager <down> next-line
+
+#
+# Default inbox
+#
+set spoolfile=imaps://$my_server/INBOX
+
+#
+# Default location of mailboxes
+#
+set folder=imaps://$my_server/INBOX
+set header_cache = "~/.mutt/cache/headers"
+
+# PGP settings
+set crypt_autosign=yes
+#set crypt_use_gpgme=yes
+set pgp_sign_as=0x85BE4B0C
+bind compose p pgp-menu
+source ~/.mutt/gpgrc
+
+# Editor settings 
+set editor=nvim
+
+# Reply
+set fast_reply=yes
+set include = yes
+
+#
+# Side bar
+#
+
+mailboxes "+-----------------" \
+      imaps://$my_server/INBOX \
+      "imaps://$my_server/INBOX.Sent Items" \
+      "imaps://$my_server/INBOX.Drafts" \
+
+source ~/.mutt/mutt-colors-solarized-dark-256.muttrc
+
+set pager_index_lines   = 10    # number of index lines to show
+set pager_context       = 3     # number of context lines to show
+
+# Html shit
+auto_view text/html                                      # view html automatically
