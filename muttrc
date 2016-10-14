@@ -1,7 +1,7 @@
 set my_server       =   "imap.gmail.com"
 set my_smtp_server  =   "smtp.gmail.com"
 set my_user         =   "jeffrey.wilcke@ethereum.org"
-set my_pass         =   ""
+set my_pass         = "`security find-internet-password -g -a jeffrey@ethereum.org 2>&1| perl -e 'if (<STDIN> =~ m/password: "(.*)"$/ ) { print $1; }'`"
 
 set record          =   "imaps://$my_server/INBOX.Sent Items"
 set postponed       =   "imaps://$my_server/INBOX.Drafts"
@@ -46,9 +46,19 @@ source ~/.mutt/gpgrc
 # Editor settings 
 set editor=nvim
 
+# threading
+set sort = "threads"
+set strict_threads = "yes"
+set sort_browser = "reverse-date"
+set sort_aux = "last-date-received"
+unset collapse_unread
+bind index - collapse-thread
+bind index _ collapse-all
+
 # Reply
 set fast_reply=yes
 set include = yes
+set signature = "~/.mutt/signature"
 
 #
 # Side bar

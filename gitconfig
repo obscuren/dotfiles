@@ -1,6 +1,7 @@
 [user]
     name = Jeffrey Wilcke
-    email = geffobscura@gmail.com
+    #email = geffobscura@gmail.com
+    email = jeffrey@ethereum.org
 [core]
     editor = nvim
     excludesfile = /Users/stygeo/.gitignore
@@ -31,3 +32,5 @@
 	path = nvim
 [mergetool "vimdiff"]
   cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[commit]
+	gpgsign = true
