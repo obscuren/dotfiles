@@ -16,3 +16,5 @@ alias bitcoind='/Applications/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -server'
 alias eth='cd $GOPATH/src/github.com/ethereum/go-ethereum'
 alias blog='nvim -S $HOME/.config/nvim/blog.vim'
 alias vimdiff="nvim -c '$wincmd w' -c 'wincmd J' -d"
+alias mutt='cd ~/Desktop && mutt'
+alias emacs='emacs -nw'
