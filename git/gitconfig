@@ -8,6 +8,7 @@
 [color]
     ui = true
 [alias]
+    signoff-rebase = "!GIT_SEQUENCE_EDITOR='sed -i -re s/^pick/e/' sh -c 'git rebase -i $1 && while git rebase --continue; do git commit --amend -S --no-edit; done' -"
     last = cat-file commit HEAD
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
     st = status
@@ -15,6 +16,7 @@
     hist = log -p 
 	undo-commit = reset --soft HEAD^
     yolo = !git add . && git commit --amend --no-edit && git push origin --force
+
 [format]
     pretty = format:%C(bold yellow)%H%Creset %C(bold cyan)%ci%Creset%n%C(bold green)%an%Creset %C(bold)%s%Creset%n
 [github]
@@ -27,10 +29,9 @@
 [push]
     default = matching
 [merge]
-	tool = vimdiff
+	tool = difftool
 [mergetool]
-	path = nvim
-[mergetool "vimdiff"]
-  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
-[commit]
-	gpgsign = true
+	path = emacsclient
+[mergetool "difftool"]
+  cmd = emacsclient --eval '(ediff-files "$REMOTE" "$MERGED")'
+ #cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
