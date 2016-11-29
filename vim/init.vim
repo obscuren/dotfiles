@@ -7,14 +7,20 @@ execute pathogen#infect()
 
 "########################## Plugin settings ############################
 let g:go_bin_path = "/home/jeffrey/go"
-let g:python_host_prog = "/usr/local/bin/python"
 let g:go_fmt_command = "goimports" 
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+let g:python_host_prog = "/usr/local/bin/python"
 let g:airline_powerline_fonts = 1
 " When opening a file with Ack, open in the middle of the screen
 "let g:ack_mappings = { "o": "<CR>zz" }
 let g:ackhighlight = 1
 let g:ackpreview = 1
-
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
@@ -73,8 +79,8 @@ set cursorline                  " Set cursor
 
 set autoindent                  " Autoindent new lines
 set expandtab                   " Use spaces instead of tabs
-set tabstop=4                   " Set tabs to 2 whitespaces
-set shiftwidth=4                " 2
+set tabstop=8                   " Set tabs to 2 whitespaces
+set shiftwidth=8                " 8
 set mouse=a                     " Enable mouse support
 set title                       " Set the title of the current file as xterm title
 set shiftround                  " When at 3 spaces indent to 4 instead of 5
@@ -157,6 +163,12 @@ nnoremap <silent> <Leader>feR :source ~/.config/nvim/init.vim<CR>
 "=========== Go dev ====================
 
 nnoremap <silent> <Leader>mgg :GoDef<CR>
+nmap <silent> <leader>mtt <Plug>(go-test)
+nmap <silent> <leader>mr <Plug>(go-run)
+nmap <leader>mce <Plug>(go-callees)
+nmap <leader>mcc <Plug>(go-callers)
+nmap <leader>mb <Plug>(go-build)
+nmap <Leader>md <Plug>(go-doc)
 
 
 "=========== Buffers ===================
@@ -168,7 +180,7 @@ nnoremap <silent> <Leader>bd :bdel<CR>
 "=========== Project ===================
 
 nnoremap <silent> <Leader>pf :CtrlP<CR>
-nnoremap <silent> <Leader>pb :TagbarToggle<CR>
+nnoremap <silent> <Leader>pt :TagbarToggle<CR>
 
 
 "=========== File ======================
